@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'short_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ddi0a98s7lhtm9',
-        'HOST': 'ec2-34-233-115-14.compute-1.amazonaws.com',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'HOST': 'localhost',
         'PORT': 5432,
-        'USER': 'cwdkdxffanpqba',
-        'PASSWORD': '0ff5d6e61ff578ca254bbb0a5ada575a7cb8ae5dbbdb48130c9d7cfb7570f211'
+        'USER': 'postgres',
+        'PASSWORD': 'admin'
     }
 }
 
@@ -136,4 +136,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
