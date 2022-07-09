@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+<div>
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user }}</p>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'profile' %}">Profile</a>
+        <a href="{% url 'short' %}">Short</a>
+    {% else %}
+        <h1>Войдите или зарегистрируйтесь, чтобы пользоваться приложением</h1>
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'registration' %}">Sign Up</a>
+        <a href="{% url 'short' %}">Short</a>
+    {% endif %}
+
+</div>
+</body>
+</html>
