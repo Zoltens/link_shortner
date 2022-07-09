@@ -47,11 +47,13 @@ def short_link(request):
 
 class Log(LoginView):
     template_name = 'login.html'
+    next_page = '/'
 
 
 class Out(LogoutView):
     template_name = 'logout.html'
-    next_page = '/main'
+    next_page = '/'
+
 
 
 class Registr(CreateView):
