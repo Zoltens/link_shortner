@@ -3,6 +3,8 @@
 {% block content %}
     <dif>
         <br>
-        <h4>Ваша ссылка: <a href="{% url 'redirect' url.short_id %}">http:/localhost:8000/{{ url.short_id }}</a></h4>
+        <h4>Ваша ссылка: <a
+                href="{% url 'redirect' url.short_id %}">https://fierce-everglades-77803.herokuapp.com/{{ url.short_id }}</a>
+        </h4>
     </dif>
 {% endblock %}
