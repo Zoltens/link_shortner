@@ -11,10 +11,8 @@ from .forms import ShortForm
 from .models import Urls
 
 
-def show_hello(request):
-    url = Urls.objects.filter(user_id=request.user.id)
-    context = {'url': url}
-    return render(request, 'basic.html', context)
+def index(request):
+    return render(request, 'basic.html')
 
 
 def profile(request):
@@ -28,7 +26,7 @@ def redirect_to_orig(request, short_id):
     return redirect(url.httpurl)
 
 
-@login_required(login_url='main')
+@login_required(login_url='login')
 def short_link(request):
     if request.method == 'POST':
         form = ShortForm(request.POST)
@@ -45,18 +43,16 @@ def short_link(request):
         return render(request, 'short.html', context)
 
 
-class Log(LoginView):
+class LoginUser(LoginView):
     template_name = 'login.html'
     next_page = '/'
 
 
-class Out(LogoutView):
-    template_name = 'logout.html'
+class LogoutUser(LogoutView):
     next_page = '/'
 
 
-
-class Registr(CreateView):
+class RegistrUser(CreateView):
     form_class = UserCreationForm
     template_name = 'registration.html'
-    success_url = reverse_lazy('main')
+    success_url = reverse_lazy('login')

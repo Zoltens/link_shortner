@@ -10,6 +10,10 @@ class Urls(models.Model):
     short_id = models.CharField(max_length=10)
     httpurl = models.URLField(max_length=200)
 
+    class Meta:
+        verbose_name = 'Ссылка'
+        verbose_name_plural = 'Ссылки'
+
     def __str__(self):
         return self.httpurl
 

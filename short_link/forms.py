@@ -8,5 +8,5 @@ class ShortForm(ModelForm):
     class Meta:
         model = Urls
         fields = ['httpurl']
-        labels = {'httpurl': 'Длинная ссылка'}
+        labels = {'httpurl': 'Вставьте вашу ссылку'}
 

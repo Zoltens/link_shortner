@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div>
-    {% for u in url %}
-        <p>{{ u.httpurl }}</p>
-        <p>https://fierce-everglades-77803.herokuapp.com/{{ u.short_id }}</p>
-    {% endfor %}
-</div>
-</body>
-</html>
+{% extends 'basic.html' %}
+{% block content %}
+    <body>
+    <div>
+        <h1>Ваша история</h1>
+        {% for u in url %}
+            <div>
+                <h4>{{ u.httpurl }}:<a href="{% url 'redirect' u.short_id %}">http:/localhost:8000/{{ u.short_id }}</a>
+                </h4>
+                <br>
+
+            </div>
+        {% endfor %}
+    </div>
+    </body>
+{% endblock %}

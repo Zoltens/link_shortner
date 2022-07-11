@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>Hello</p>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="OK">
-</form>
-<dif>
-    <p>Ваша ссылка: https://fierce-everglades-77803.herokuapp.com/{{ url.short_id }}</p>
-</dif>
-</body>
-</html>
+{% extends 'basic.html' %}
+{% block title %}Готово{% endblock %}
+{% block content %}
+    <dif>
+        <br>
+        <h4>Ваша ссылка: <a href="{% url 'redirect' url.short_id %}">http:/localhost:8000/{{ url.short_id }}</a></h4>
+    </dif>
+{% endblock %}
