@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -26,19 +28,29 @@ def redirect_to_orig(request, short_id):
     return redirect(url.httpurl)
 
 
-@login_required(login_url='login')
+def short_succes(request):
+    url = Urls.objects.last()
+    context = {'url': url}
+    return render(request, 'short_succes.html', context)
+
+
+# @login_required(login_url='login')
 def short_link(request):
-    if request.method == 'POST':
-        form = ShortForm(request.POST)
-        if form.is_valid():
-            forms = form.save(commit=False)
-            forms.user = request.user
-            form.save()
-            url = Urls.objects.last()
-            context = {'form': form, 'url': url}
-            return render(request, 'short_succes.html', context)
+    if request.user.is_anonymous:
+        messages.add_message(request, messages.INFO, message='Извините, нужно войти или зарегистрироваться, '
+                                                             'чтобы использовать '
+                                                             'приложение.')
+        return redirect('index')
     else:
-        form = ShortForm()
+        if request.method == 'POST':
+            form = ShortForm(request.POST)
+            if form.is_valid():
+                forms = form.save(commit=False)
+                forms.user = request.user
+                form.save()
+                return redirect('short_succes')
+        else:
+            form = ShortForm()
         context = {'form': form}
         return render(request, 'short.html', context)
 
@@ -52,7 +64,14 @@ class LogoutUser(LogoutView):
     next_page = '/'
 
 
-class RegistrUser(CreateView):
+class RegistrUser(SuccessMessageMixin, CreateView):
     form_class = UserCreationForm
     template_name = 'registration.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('index')
+    success_message = 'Вы зарегистрировались как %(username)s.'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            username=self.object.username,
+        )

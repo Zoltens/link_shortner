@@ -8,16 +8,18 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>{% block title %}Главная{% endblock %}</title>
 </head>
+<header>
+</header>
 <body>
 <div>
     {% if user.is_authenticated %}
-        <h4>Привет, {{ user.username }}.</h4>
+        <h4>Добро пожаловать, {{ user.username }}.</h4>
         <a href="{% url 'index' %}">Главная</a>
         <a href="{% url 'logout' %}">Выход</a>
         <a href="{% url 'profile' %}">История</a>
         <a href="{% url 'short' %}">Сократить</a>
     {% else %}
-        <h1>Войдите или зарегистрируйтесь, чтобы использовать приложение.</h1>
+        <h4>Добро пожаловать!</h4>
         <a href="{% url 'index' %}">Главная</a>
         <a href="{% url 'login' %}">Вход</a>
         <a href="{% url 'registration' %}">Регистрация</a>
@@ -26,6 +28,15 @@
 </div>
 {% block content %}
 {% endblock %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% if message.tags %}{% endif %}{{ message }}
+{#            <strong>{{ user.username }}</strong>#}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
