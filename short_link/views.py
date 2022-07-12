@@ -1,9 +1,13 @@
+import random
+import string
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponse
 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -36,12 +40,7 @@ def short_succes(request):
 
 # @login_required(login_url='login')
 def short_link(request):
-    if request.user.is_anonymous:
-        messages.add_message(request, messages.INFO, message='Извините, нужно войти или зарегистрироваться, '
-                                                             'чтобы использовать '
-                                                             'приложение.')
-        return redirect('index')
-    else:
+    if request.user.is_authenticated:
         if request.method == 'POST':
             form = ShortForm(request.POST)
             if form.is_valid():
@@ -53,6 +52,11 @@ def short_link(request):
             form = ShortForm()
         context = {'form': form}
         return render(request, 'short.html', context)
+    else:
+        messages.add_message(request, messages.INFO, message='Извините, нужно войти или зарегистрироваться, '
+                                                             'чтобы использовать '
+                                                             'приложение.')
+        return render(request, 'basic.html')
 
 
 class LoginUser(LoginView):

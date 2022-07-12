@@ -1,13 +1,7 @@
 {% extends 'basic.html' %}
 {% block title %}Готово{% endblock %}
 {% block content %}
-    {#    <dif>#}
-    {#        <br>#}
-    {#        <h4>Ваша ссылка: <a#}
-    {#                href="{% url 'redirect' url.short_id %}">https://fierce-everglades-77803.herokuapp.com/{{ url.short_id }}</a>#}
-    {#        </h4>#}
-    {#    </dif>#}
-    <div class="alert alert-primary" role="alert">
+    <div class="alert alert-light" role="alert">
         Ваша ссылка: <a href="{% url 'redirect' url.short_id %}" class="alert-link">https://fierce-everglades-77803
         .herokuapp.com
         /{{ url.short_id }}</a>. Скопируйте или нажмите, чтобы перейти.
