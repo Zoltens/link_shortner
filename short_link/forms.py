@@ -1,12 +1,10 @@
-from django.contrib.auth.models import User
-from django.forms import ModelForm
+from django import forms
 
 from .models import Urls
 
 
-class ShortForm(ModelForm):
+class ShortForm(forms.ModelForm):
     class Meta:
         model = Urls
         fields = ['httpurl']
         labels = {'httpurl': 'Вставьте вашу ссылку'}
-
