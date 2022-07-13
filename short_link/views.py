@@ -16,9 +16,14 @@ def index(request):
 
 
 def profile(request):
-    url = Urls.objects.filter(user_id=request.user.id)
-    context = {'url': url}
-    return render(request, 'profile.html', context)
+    if request.user.is_authenticated:
+        url = Urls.objects.filter(user_id=request.user.id)
+        context = {'url': url}
+        return render(request, 'profile.html', context)
+    else:
+        messages.add_message(request, messages.INFO, message='Извините, нужно войти, '
+                                                             'чтобы просмотреть историю.')
+        return render(request, 'basic.html')
 
 
 def redirect_to_orig(request, short_id):
