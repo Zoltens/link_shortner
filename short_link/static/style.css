@@ -2,6 +2,11 @@
     margin: 20px;
 }
 
+.collapse {
+    justify-content: center;
+}
+
 .alert {
     margin: 20px;
 }
+

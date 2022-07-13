@@ -54,17 +54,16 @@
         </div>
     </nav>
 {% endif %}
-{% block content %}
-{% endblock %}
 {% if messages %}
     {% for message in messages %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {% if message.tags %}{% endif %}{{ message }}
-            {#            <strong>{{ user.username }}</strong>#}
+            {% if message.tags %}{{ message }}{% endif %}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     {% endfor %}
 {% endif %}
+{% block content %}
+{% endblock %}
 </body>
 </html>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

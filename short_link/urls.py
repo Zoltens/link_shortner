@@ -1,7 +1,6 @@
 from django.urls import path
 
 from .views import LoginUser, LogoutUser, RegistrUser, short_link, redirect_to_orig, profile, index, short_succes
-
 urlpatterns = [
     path('', index, name='index'),
     path('login/', LoginUser.as_view(), name='login'),

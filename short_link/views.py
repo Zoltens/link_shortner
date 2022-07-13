@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from .forms import ShortForm
+from .forms import ShortForm, LoginForm
 from .models import Urls
 
 
@@ -55,6 +55,7 @@ def short_link(request):
 
 
 class LoginUser(LoginView):
+    authentication_form = LoginForm
     template_name = 'login.html'
     next_page = '/'
 
