@@ -2,16 +2,15 @@
 {% block title %}История{% endblock %}
 {% block content %}
     <body>
-    <div>
-        <h1>Ваша история</h1>
+    <ol class="list-group list-group-numbered">
         {% for u in url %}
-            <div>
-                <h4>{{ u.httpurl }}:<a href="{% url 'redirect' u.short_id %}">https://fierce-everglades-77803.herokuapp.com/{{ u.short_id }}</a>
-                </h4>
-                <br>
-
-            </div>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">{{ u.httpurl }}</div>
+                    <a href={% url 'redirect' u.short_id %}>https://fierce-everglades-77803.herokuapp.com/{{ u.short_id }}</a>
+                </div>
+            </li>
         {% endfor %}
-    </div>
+    </ol>
     </body>
 {% endblock %}
