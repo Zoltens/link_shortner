@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -8,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from .forms import ShortForm, LoginForm
+from .forms import ShortForm, LoginForm, CreateForm
 from .models import Urls
 
 
@@ -65,7 +64,7 @@ class LogoutUser(LogoutView):
 
 
 class RegistrUser(SuccessMessageMixin, CreateView):
-    form_class = UserCreationForm
+    form_class = CreateForm
     template_name = 'registration.html'
     success_url = reverse_lazy('index')
     success_message = 'Вы зарегистрировались как %(username)s.'
