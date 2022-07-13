@@ -10,6 +10,12 @@ class ShortForm(forms.ModelForm):
         fields = ['httpurl']
         labels = {'httpurl': 'Вставьте вашу ссылку'}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['httpurl'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+
 
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
