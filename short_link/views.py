@@ -58,6 +58,12 @@ def short_link(request):
         return render(request, 'basic.html')
 
 
+def delete_link(request, pk):
+    link = Urls.objects.filter(id=pk)
+    link.delete()
+    return redirect('profile')
+
+
 class LoginUser(LoginView):
     authentication_form = LoginForm
     template_name = 'login.html'

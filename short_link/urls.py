@@ -1,6 +1,8 @@
 from django.urls import path
 
-from .views import LoginUser, LogoutUser, RegistrUser, short_link, redirect_to_orig, profile, index, short_succes
+from .views import LoginUser, LogoutUser, RegistrUser, short_link, redirect_to_orig, profile, index, short_succes, \
+    delete_link
+
 urlpatterns = [
     path('', index, name='index'),
     path('login/', LoginUser.as_view(), name='login'),
@@ -9,5 +11,6 @@ urlpatterns = [
     path('short/', short_link, name='short'),
     path('short_succes/', short_succes, name='short_succes'),
     path('profile/', profile, name='profile'),
+    path('<int:pk>/delete/', delete_link, name='delete'),
     path('<slug:short_id>/', redirect_to_orig, name='redirect'),
 ]

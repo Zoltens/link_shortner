@@ -8,6 +8,10 @@
                 <div class="ms-2 me-auto">
                     <div class="fw-bold">{{ u.httpurl }}</div>
                     <a href={% url 'redirect' u.short_id %}>https://fierce-everglades-77803.herokuapp.com/{{ u.short_id }}</a>
+                    <form action="{% url 'delete' u.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-primary">Удалить</button>
+                    </form>
                 </div>
             </li>
         {% endfor %}
