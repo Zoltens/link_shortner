@@ -61,6 +61,7 @@ def short_link(request):
 def delete_link(request, pk):
     link = Urls.objects.filter(id=pk)
     link.delete()
+    messages.add_message(request, messages.INFO, message='Ссылка успешно удалена.')
     return redirect('profile')
 
 
