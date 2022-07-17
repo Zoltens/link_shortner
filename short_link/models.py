@@ -6,7 +6,7 @@ from django.db import models
 
 
 class Urls(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     short_id = models.CharField(max_length=10)
     httpurl = models.URLField(max_length=200)
 

@@ -37,7 +37,6 @@ def short_succes(request):
     return render(request, 'short_succes.html', context)
 
 
-# @login_required(login_url='login')
 def short_link(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -52,10 +51,15 @@ def short_link(request):
         context = {'form': form}
         return render(request, 'short.html', context)
     else:
-        messages.add_message(request, messages.INFO, message='Извините, нужно войти или зарегистрироваться, '
-                                                             'чтобы использовать '
-                                                             'приложение.')
-        return render(request, 'basic.html')
+        if request.method == 'POST':
+            form = ShortForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('short_succes')
+        else:
+            form = ShortForm()
+        context = {'form': form}
+        return render(request, 'short.html', context)
 
 
 def delete_link(request, pk):
